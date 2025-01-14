@@ -1,11 +1,11 @@
-import { Navbar } from "./Navbar" 
+import { Header } from "./Header" 
 import { Galeria } from "./Galeria"
 
 export function App() {
   return (
     <>
       <div className="">
-        <Navbar />
+        <Header />
         <Galeria />
       </div>
 

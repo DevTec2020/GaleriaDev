@@ -26,7 +26,7 @@ export function Galeria(){
                         <img 
                             src={`${img.download_url}?w=200&h=150`} 
                             alt={`Foto de ${img.author}`}
-                            className="h-48 w-56"
+                            className="h-48 w-56 rounded-sm"
                             loading="lazy"
                         />
                     </div>
