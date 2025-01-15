@@ -1,3 +1,5 @@
+
+
 import PersonIco from "../assets/person.png"
 import GaleriaDevIco from "../../public/GaleriaIco.png"
 
@@ -15,8 +17,8 @@ export function Header() {
                 </div>
 
                 <div className="flex gap-5 justify-center items-center">
-                    <span className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2">Galeria</span>
-                    <span className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2">Favoritos</span>
+                    <span className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2 cursor-pointer" >Galeria</span>
+                    <span className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2 cursor-pointer" >Favoritos</span>
                     <img className="h-9 " src={PersonIco} alt="Icone de usuário" />
                 </div>
             </nav>
