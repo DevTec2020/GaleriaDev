@@ -1,34 +1,54 @@
 import { useState, useEffect } from "react"
+import { fetchImagens } from "../api"
 
 
 interface Imagem {
     id: string
     author: string
+    width: number
+    height: number
+    url: string
     download_url:string
+
 }
 
 export function Galeria(){
-    const [Imagens, setImagens] = useState<Imagem[]>([]);
+    const [imagens, setImagens] = useState<Imagem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null)
 
+    
 
-
-    // Importando imagem da API
+    // Importando dados da API
     useEffect(() => {
-        fetch('https://picsum.photos/v2/list')
-            .then((response) => response.json())
-            .then((data) => setImagens(data))
-            .catch((error) => console.error("Erro ao carregar imagens", error));
+        const loadImages = async () => {
+
+            //Chama a função com os dados
+            const data = await fetchImagens();
+
+            if (data.length === 0) {
+                setError("Não foi possivel carregar os dados e imagens.")
+            } else {
+                setImagens(data)
+            }
+            setLoading(false);
+        };
+
+        loadImages();
     },[]);
+
+    if (loading) return <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">Carregando...</p>;
+    if (error) return <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">{error}</p>;
 
 
     return (
         <div className="flex items-center justify-center mt-10">
             <div className="container flex justify-center flex-wrap gap-4 ">
-                {Imagens.map((img) => (
-                    <div key={img.id} className="relative">
+                {imagens.map((image) => (
+                    <div key={image.id} className="relative">
                         <img 
-                            src={`${img.download_url}?w=200&h=150`} 
-                            alt={`Foto de ${img.author}`}
+                            src={`${image.download_url}?w=200&h=150`} 
+                            alt={`Foto de ${image.author}`}
                             className="h-72 w-80 rounded-lg hover:object-cover"
                             loading="lazy"
                         />
