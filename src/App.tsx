@@ -1,5 +1,6 @@
 import { Header } from "./Header" 
 import { Galeria } from "./Galeria"
+import { Footer } from "./Footer"
 
 export function App() {
   return (
@@ -7,6 +8,7 @@ export function App() {
       <div className="">
         <Header />
         <Galeria />
+        <Footer />
       </div>
 
     </>

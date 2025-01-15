@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import  starIco  from "../../src/assets/star_Mark.svg"
+
 
 interface Imagem {
     id: string
