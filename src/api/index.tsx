@@ -1,15 +1,6 @@
 
 const apiUrl: string = 'https://picsum.photos/v2/list' 
 
-interface Iimagens {
-    id: number
-    author: string
-    width: number
-    height: number
-    url: string
-    download_url: string
-}
-
 export const fetchImagens = async () => {
     try {
         // Consultando API
