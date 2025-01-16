@@ -3,7 +3,12 @@
 import PersonIco from "../../assets/person.png"
 import GaleriaDevIco from "../../../public/GaleriaIco.png"
 
-export function Header() {
+{/* Criando Prop que vai retornar a pagina clicada */}
+type HeaderProps = {
+    setCurrentPage: (page: string) => void;
+}
+
+export function Header({ setCurrentPage }: HeaderProps) {
     return (
         <div className="flex flex-col items-center justify-center pt-10 pb-5 bg-slate-100">
             {/* Navegação */}
@@ -17,8 +22,20 @@ export function Header() {
                 </div>
 
                 <div className="flex gap-5 justify-center items-center">
-                    <span className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2 cursor-pointer" >Galeria</span>
-                    <span className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2 cursor-pointer" >Favoritos</span>
+
+                    {/* Aqui utilizo o onClick para setar o valor que corresponde a pagina que deve abrir */}
+                    <span 
+                        className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2 cursor-pointer" 
+                        onClick={() => setCurrentPage("galeria")}>
+                            Galeria
+                    </span>
+
+                    <span 
+                        className="font-medium text-slate-500 hover:text-orange-600 hover:border-orange-600 hover:border-b-2 cursor-pointer"
+                        onClick={() => setCurrentPage("favorites")}>
+                            Favoritos
+                    </span>
+                    
                     <img className="h-9 " src={PersonIco} alt="Icone de usuário" />
                 </div>
             </nav>

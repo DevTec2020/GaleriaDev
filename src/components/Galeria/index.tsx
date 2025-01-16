@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { fetchImagens } from "../../api"
 import { ImageModal } from "../Modal"
 
+import { Star } from "phosphor-react";
+
 
 interface Imagem {
     id: string
@@ -48,8 +50,10 @@ export function Galeria(){
                             loading="lazy"
                         />
 
-                        <button className="absolute top-1 right-1 px-2 py-1 font-bold text-2xl  text-orange-500 rounded-full">
-                            O
+                        <button 
+                            className="absolute bg-orange-200 top-1 right-1 p-1 font-bold text-2xl  text-orange-500 rounded-full"
+                        >
+                                <Star size={22} />
                         </button>
 
                     </div>
