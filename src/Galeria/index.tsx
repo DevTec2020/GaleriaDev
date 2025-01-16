@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
 import { fetchImagens } from "../api"
+import { ImageModal } from "../Modal"
 
 
 interface Imagem {
     id: string
     author: string
-    width: number
-    height: number
+    width: string
+    height: string
     url: string
     download_url:string
 
@@ -15,7 +16,7 @@ interface Imagem {
 export function Galeria(){
     const [imagens, setImagens] = useState<Imagem[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null)
+    const [selectedImage, setSelectedImage] = useState<Imagem | null>(null)
 
     
 
@@ -25,27 +26,21 @@ export function Galeria(){
 
             //Chama a função com os dados
             const data = await fetchImagens();
-
-            if (data.length === 0) {
-                setError("Não foi possivel carregar os dados e imagens.")
-            } else {
-                setImagens(data)
-            }
             setLoading(false);
+            setImagens(data)
         };
 
         loadImages();
     },[]);
 
     if (loading) return <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">Carregando...</p>;
-    if (error) return <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">{error}</p>;
 
 
     return (
         <div className="flex items-center justify-center mt-10">
             <div className="container flex justify-center flex-wrap gap-4 ">
                 {imagens.map((image) => (
-                    <div key={image.id} className="relative">
+                    <div key={image.id} className="relative cursor-pointer" onClick={() => setSelectedImage(image)}>
                         <img 
                             src={`${image.download_url}?w=200&h=150`} 
                             alt={`Foto de ${image.author}`}
@@ -61,6 +56,17 @@ export function Galeria(){
                     </div>
                 ))}
             </div>
+
+            {/*Modal*/}
+            <ImageModal
+                isOpen={!!selectedImage}
+                imageUrl={selectedImage?.download_url || ""}
+                author={selectedImage?.author || ""}
+                width={selectedImage?.width || ""}
+                height={selectedImage?.height || ""}
+                download_url={selectedImage?.download_url || ""}
+                onClose={() => setSelectedImage(null)}
+            />
         </div>    
     )
 }

@@ -8,11 +8,10 @@ export const fetchImagens = async () => {
         if (!response.ok) {
             throw new Error("Erro ao buscar os dados da API.")
         }
-        const data = await response.json();
         
         // Retornando os dados consultados na API
-        return data;
-        
+        return await response.json();
+    
     } catch (error) {
        console.error(error);
 
