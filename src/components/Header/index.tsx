@@ -1,7 +1,7 @@
 
 
-import PersonIco from "../assets/person.png"
-import GaleriaDevIco from "../../public/GaleriaIco.png"
+import PersonIco from "../../assets/person.png"
+import GaleriaDevIco from "../../../public/GaleriaIco.png"
 
 export function Header() {
     return (

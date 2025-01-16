@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { fetchImagens } from "../api"
+import { fetchImagens } from "../../api"
 import { ImageModal } from "../Modal"
 
 
@@ -47,11 +47,10 @@ export function Galeria(){
                             className="h-72 w-80 rounded-lg hover:object-cover"
                             loading="lazy"
                         />
-                         
-                        <input 
-                            className="absolute inset-0 w-5 h-5 m-2 text-orange-500 rounded-full"
-                            type="checkbox" 
-                        />
+
+                        <button className="absolute top-1 right-1 px-2 py-1 font-bold text-2xl  text-orange-500 rounded-full">
+                            O
+                        </button>
 
                     </div>
                 ))}

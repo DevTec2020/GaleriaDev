@@ -1,6 +1,6 @@
-import { Header } from "./Header" 
-import { Galeria } from "./Galeria"
-import { Footer } from "./Footer"
+import { Header } from "./components/Header" 
+import { Galeria } from "./components/Galeria"
+import { Footer } from "./components/Footer"
 
 export function App() {
   return (
