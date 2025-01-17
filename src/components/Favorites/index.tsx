@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-import { Star, Sparkle } from "phosphor-react";
+import { Star} from "phosphor-react";
 
 
 interface Imagem {
