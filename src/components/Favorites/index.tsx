@@ -31,31 +31,32 @@ const removerFavorito = (id: string) => {
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
   };
 
-  return (
+    return (
     <div className="flex items-center justify-center mt-10">
-      <div className="container flex justify-center flex-wrap gap-4">
+        <div className="container flex justify-center flex-wrap gap-4">
         {favoritos.length > 0 ? (
-          favoritos.map((image) => (
+            favoritos.map((image) => (
             <div key={image.id} className="relative cursor-pointer">
-              <img
+                <img
                 src={`${image.download_url}?w=200&h=150`}
                 alt={`Foto de ${image.author}`}
                 className="h-72 w-80 rounded-lg hover:object-cover"
                 loading="lazy"
-              />
+                />
 
-              <button
+                <button
                 className="absolute bg-orange-200 top-1 right-1 p-1 font-bold text-orange-500 rounded-full hover:bg-orange-300"
                 onClick={() => removerFavorito(image.id)}
-              >
+                >
                 <Star size={27} weight="fill" />
-              </button>
+                </button>
             </div>
-          ))
+            ))
         ) : (
-          <p className="text-center text-gray-500">Nenhum favorito ainda.</p>
+            <p className="text-center my-10 text-xl font-semibold text-slate-500">Nenhuma imagem adicionada ainda.</p>
+            
         )}
-      </div>
+        </div>
     </div>
-  );
+    );
 }
