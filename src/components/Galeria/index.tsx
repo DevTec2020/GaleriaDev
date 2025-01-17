@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { fetchImagens } from "../../api"
 import { ImageModal } from "../Modal"
 
-import { Star } from "phosphor-react";
+import { Star} from "phosphor-react";
 
 
 interface Imagem {
@@ -19,6 +19,7 @@ export function Galeria(){
     const [imagens, setImagens] = useState<Imagem[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState<Imagem | null>(null)
+    const [favoritos, setFavoritos] = useState<Imagem[]>([]);
 
     
 
@@ -35,7 +36,52 @@ export function Galeria(){
         loadImages();
     },[]);
 
-    if (loading) return <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">Carregando...</p>;
+
+    // Carregar favoritos armazenados no localStorage
+    useEffect(() => {
+        const favoritosSalvos = localStorage.getItem("favoritos");
+        if (favoritosSalvos) {
+          setFavoritos(JSON.parse(favoritosSalvos));
+        }
+      }, []);
+
+
+
+
+    // Função para salvar favoritos no localStorage
+    const salvarFavoritos = (favoritosAtualizados: Imagem[]) => {
+        setFavoritos(favoritosAtualizados);
+        localStorage.setItem("favoritos", JSON.stringify(favoritosAtualizados));
+    };
+
+
+    // Função para marcar/desmarcar imagem como favorita
+    const toggleFavorito = (imagem: Imagem) => {
+
+        //Verificando se a imagem clicada ja é favoritada 
+        const jaFavorito = favoritos.some((fav) => fav.id === imagem.id);
+
+        // Se SIM ele remove das favoritas
+        if (jaFavorito) {
+            const novosFavoritos = favoritos.filter((fav) => fav.id !== imagem.id);
+            salvarFavoritos(novosFavoritos);
+        } 
+        
+        // Caso não, ele adiciona no arry
+        else {
+            const novosFavoritos = [...favoritos, imagem];
+            salvarFavoritos(novosFavoritos);
+        }
+    };
+
+
+    //Aguardando carregar as iagens 
+    if (loading) 
+        return (
+            <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">
+                Carregando...
+            </p>
+        );
 
 
     return (
@@ -52,10 +98,11 @@ export function Galeria(){
                         />
 
                         <button 
-                            className="absolute bg-orange-200 top-1 right-1 p-1 font-bold text-2xl  text-orange-500 rounded-full"
-                            onClick={() => alert("clicou")}>
+                            className="absolute top-1 right-1 p-1 font-bold text-2xl bg-orange-200 text-orange-500 rounded-full hover:bg-orange-300"
+                            onClick={() => toggleFavorito(image)}
+                        >
                         
-                            <Star size={22} />
+                        {favoritos.some((fav) => fav.id === image.id) ? (<Star size={27} weight="fill"/>) : (<Star size={27} />)}
                         
                         </button>
 
