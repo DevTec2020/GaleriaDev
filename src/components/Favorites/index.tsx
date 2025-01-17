@@ -53,7 +53,7 @@ const removerFavorito = (id: string) => {
             </div>
             ))
         ) : (
-            <p className="text-center my-10 text-xl font-semibold text-slate-500">Nenhuma imagem adicionada ainda.</p>
+            <p className="text-center my-10 text-xl font-semibold text-slate-500 ">Nenhuma imagem adicionada ainda.</p>
             
         )}
         </div>
