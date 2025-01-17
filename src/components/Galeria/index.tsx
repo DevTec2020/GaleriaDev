@@ -42,18 +42,21 @@ export function Galeria(){
         <div className="flex items-center justify-center mt-10">
             <div className="container flex justify-center flex-wrap gap-4 ">
                 {imagens.map((image) => (
-                    <div key={image.id} className="relative cursor-pointer" onClick={() => setSelectedImage(image)}>
+                    <div key={image.id} className="relative cursor-pointer">
                         <img 
                             src={`${image.download_url}?w=200&h=150`} 
                             alt={`Foto de ${image.author}`}
                             className="h-72 w-80 rounded-lg hover:object-cover"
                             loading="lazy"
+                            onClick={() => setSelectedImage(image)}
                         />
 
                         <button 
                             className="absolute bg-orange-200 top-1 right-1 p-1 font-bold text-2xl  text-orange-500 rounded-full"
-                        >
-                                <Star size={22} />
+                            onClick={() => alert("clicou")}>
+                        
+                            <Star size={22} />
+                        
                         </button>
 
                     </div>

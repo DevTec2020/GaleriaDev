@@ -1,3 +1,6 @@
+import { X } from "phosphor-react";
+
+
 interface ImageModalProps {
     isOpen: boolean
     imageUrl: string
@@ -15,10 +18,10 @@ export function ImageModal({ isOpen, imageUrl, author, width, height, download_u
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
           <div className="bg-white p-4 rounded shadow-lg relative" onClick={(e) => e.stopPropagation()}>
             <button
-              className="absolute top-1 right-1 px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600"
+              className="absolute top-1 right-1 p-1.5 bg-orange-500 text-white rounded-full hover:bg-orange-600"
               onClick={onClose}
             >
-              X
+              <X size={32}/>
             </button>
 
             <img src={imageUrl} alt={`Foto de ${author}`} className="w-96 rounded" />
