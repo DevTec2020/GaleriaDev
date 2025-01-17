@@ -78,7 +78,7 @@ export function Galeria(){
     //Aguardando carregar as iagens 
     if (loading) 
         return (
-            <p className="flex justify-center my-10 text-3xl font-bold text-orange-500">
+            <p className="text-center my-10 text-xl font-bold text-slate-500">
                 Carregando...
             </p>
         );
