@@ -4,6 +4,16 @@ import { ImageModal } from "../Modal"
 
 import { Star} from "phosphor-react";
 
+type GaleriaProps = {
+    filterImagens: { 
+        id: string
+        author: string
+        width: string
+        height: string
+        url: string
+        download_url:string 
+    }[];
+}
 
 interface Imagem {
     id: string
@@ -15,7 +25,7 @@ interface Imagem {
 
 }
 
-export function Galeria(){
+export function Galeria({ filterImagens }: GaleriaProps){
     const [imagens, setImagens] = useState<Imagem[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState<Imagem | null>(null)
@@ -75,6 +85,9 @@ export function Galeria(){
     };
 
 
+    // Aplicando filtro de imagens
+    const imagensFiltradas = filterImagens.length > 0 ? filterImagens : imagens;
+
     //Aguardando carregar as iagens 
     if (loading) 
         return (
@@ -87,27 +100,34 @@ export function Galeria(){
     return (
         <div className="flex items-center justify-center mt-10">
             <div className="container flex justify-center flex-wrap gap-4 ">
-                {imagens.map((image) => (
-                    <div key={image.id} className="relative cursor-pointer">
-                        <img 
-                            src={`${image.download_url}?w=200&h=150`} 
-                            alt={`Foto de ${image.author}`}
-                            className="h-72 w-80 rounded-lg hover:object-cover"
-                            loading="lazy"
-                            onClick={() => setSelectedImage(image)}
-                        />
+                {imagensFiltradas.length === 0 ? (
+                    <p className="text-center my-10 text-xl font-bold text-slate-500">
+                        Nenhuma imagem encontrada.
+                    </p>
+                ) : (
 
-                        <button 
-                            className="absolute top-1 right-1 p-1 font-bold text-2xl bg-orange-200 text-orange-500 rounded-full hover:bg-orange-300"
-                            onClick={() => toggleFavorito(image)}
-                        >
-                        
-                        {favoritos.some((fav) => fav.id === image.id) ? (<Star size={27} weight="fill"/>) : (<Star size={27} />)}
-                        
-                        </button>
+                    imagensFiltradas.map((image) => (
+                        <div key={image.id} className="relative cursor-pointer">
+                            <img 
+                                src={`${image.download_url}?w=200&h=150`} 
+                                alt={`Foto de ${image.author}`}
+                                className="h-72 w-80 rounded-lg hover:object-cover"
+                                loading="lazy"
+                                onClick={() => setSelectedImage(image)}
+                            />
 
-                    </div>
-                ))}
+                            <button 
+                                className="absolute top-1 right-1 p-1 font-bold text-2xl bg-orange-200 text-orange-500 rounded-full hover:bg-orange-300"
+                                onClick={() => toggleFavorito(image)}
+                            >
+                            
+                            {favoritos.some((fav) => fav.id === image.id) ? (<Star size={27} weight="fill"/>) : (<Star size={27} />)}
+                            
+                            </button>
+
+                        </div>
+                    ))
+                )}
             </div>
 
             {/*Modal*/}
