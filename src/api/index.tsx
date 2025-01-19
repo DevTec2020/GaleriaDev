@@ -19,3 +19,20 @@ export const fetchImagens = async () => {
        return[]; 
     }
 };
+
+
+// Filtrando a api com base na busca
+export const filterImagens = async (search : string) => {
+    try {
+        //Aguardando os dados da api
+        const data = await fetchImagens();
+
+        // Filtra os dados retornados pelo nome o autor 
+        return data.filter((image:{author: string}) =>
+            image.author.toLowerCase().includes(search.toLowerCase())
+        );
+    } catch (error) {
+        console.error("Erro ao consultar a API:", error);
+        return [];
+    }
+};
