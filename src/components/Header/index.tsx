@@ -27,7 +27,7 @@ export function Header({ setCurrentPage, onSearch }: HeaderProps) {
     return (
         <div className="flex flex-col items-center justify-center pt-10 pb-5 bg-slate-100">
             {/* Navegação */}
-            <nav className="container flex justify-between">
+            <nav className="container flex justify-between  px-3">
                 <div className="flex ">
                     <img className="h-12" src= {GaleriaDevIco} alt="Icone Galeria" />
                     <span 
